@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+build/
+.next/
+next-env.d.ts
+out/
+.expo/
+.turbo/
+*.tsbuildinfo
+
+# Test / coverage
+coverage/
+playwright-report/
+test-results/
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Editor / OS
+.DS_Store
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Local agent / skill tooling
+.agents/
+.claude/

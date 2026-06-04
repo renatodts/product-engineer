@@ -1,0 +1,12 @@
+node_modules/
+dist/
+build/
+.next/
+.expo/
+.turbo/
+coverage/
+playwright-report/
+pnpm-lock.yaml
+.agents/
+.claude/
+docs/superpowers/

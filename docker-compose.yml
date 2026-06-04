@@ -1,0 +1,13 @@
+# TODO: Uncomment and configure services as projects require them.
+# Placeholder only — no services run in the scaffold.
+services: {}
+#  postgres:
+#    image: postgres:17-alpine
+#    environment:
+#      POSTGRES_PASSWORD: postgres
+#    ports:
+#      - "5432:5432"
+#  redis:
+#    image: redis:7-alpine
+#    ports:
+#      - "6379:6379"
