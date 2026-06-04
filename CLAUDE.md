@@ -86,3 +86,58 @@ These are settled ADRs (`docs/adrs/`); follow them rather than "fixing" the appa
 `.github/workflows/ci.yml` runs lint/format, typecheck, and unit tests in parallel (each filtered
 to changes vs `HEAD^1`), gated by a `ci-gate` job. E2E runs only on `main` or manual dispatch.
 Full docs in `docs/06-repository-conventions.md` and `docs/07-monorepo-architecture.md`.
+
+## Required skills
+
+This repo vendors a curated skill set under `.claude/skills/` (sourced from the `agent-skills`
+MCP / `@tech-leads-club/skills-catalog`). Treat these as **mandatory**: before acting on a task
+that matches a row below, invoke the named skill with the `Skill` tool and follow it. If several
+apply, run process/planning skills first, then implementation skills. Re-vendor or add skills with
+`python3 /tmp/install-skills.py` (edit its `TARGETS` list) — don't hand-write skill folders.
+
+### Workflow & planning (use first)
+
+- **tlc-spec-driven** — any feature/project work: Specify → Design → Tasks → Execute, with atomic
+  commits and `.specs/` memory. This is the default driver; it owns the `MONO-`/`APP#-` requirement IDs.
+- **codenavi** — navigating/orienting in an unfamiliar workspace or the 9-project tree.
+- **coding-guidelines** — general guardrails while writing code anywhere in the repo.
+- **learning-opportunities** — this is a learning-program repo; use to surface deliberate practice.
+- **the-fool** — red-team a plan, ADR, or decision before committing to it.
+
+### Per-stack implementation
+
+- **nestjs-modular-monolith** — `apps/*-api` (CJS NestJS, ADR-002): bounded contexts, DDD, CQRS.
+- **react-best-practices** — `apps/*-web` Next.js App Router performance/data-fetching work.
+- **react-composition-patterns** — component APIs in `packages/ui` and `packages/design-system`.
+- **react-native-expert** — `apps/*-mobile` Expo work (Expo Router, Reanimated, list perf).
+- **frontend-design** / **frontend-blueprint** — net-new UI; design discovery before building.
+
+### Architecture & domain
+
+- **domain-analysis**, **domain-identification-grouping** — drawing bounded contexts / service
+  boundaries (esp. `packages/shared-domain` and api modules).
+- **tactical-ddd** — rich vs anemic domain models in the domain layer.
+- **coupling-analysis**, **modular-decomposition**, **modular-design-principles** — keeping shared
+  packages and monolith boundaries clean; supports the ADR-004 deliberate-dependency rule.
+
+### Docs & decisions
+
+- **create-adr** — new ADRs in `docs/adrs/` (`NNN-kebab-case.md`).
+- **create-rfc** — proposals before a decision is settled.
+- **technical-design-doc-creator** — Design-phase TDDs.
+- **docs-writer** — the numbered `docs/01`–`20` guideline files.
+
+### CI, quality & security
+
+- **gh-fix-ci** — debugging failing GitHub Actions checks (our CI is GH Actions, not Nx Cloud).
+- **gh-address-comments** — addressing PR review comments via `gh`.
+- **security-best-practices**, **security-threat-model**, **security-ownership-map** — security
+  reviews, threat models, and ownership/bus-factor analysis (esp. `shared-auth` + data-handling apps).
+- **accessibility**, **web-quality-audit**, **best-practices**, **seo** — web app quality gates.
+- **core-web-vitals**, **perf-web-optimization**, **perf-lighthouse** — Next.js performance work.
+- **sentry** — read-only Sentry inspection (pairs with `packages/shared-observability`).
+
+### Tooling
+
+- **playwright-skill**, **chrome-devtools** — browser E2E (ADR-003) and in-browser debugging.
+- **mermaid-studio**, **excalidraw-studio** — diagrams for ADRs/docs.
