@@ -127,7 +127,7 @@ Husky is already configured. The design keeps existing hooks and adds one:
 |---|---|---|
 | `pre-commit` | `pnpm format:check` + `pnpm turbo lint` | Block commits with formatting or lint errors |
 | `commit-msg` | `pnpm exec commitlint --edit "$1"` | Enforce Conventional Commits locally |
-| `pre-push` *(new)* | `turbo typecheck --filter=...[HEAD]` | Catch type errors before pushing to CI |
+| `pre-push` *(new)* | `turbo typecheck --filter=...[origin/main]` | Catch type errors before pushing to CI |
 
 The pre-commit hook stays cheap (seconds). The pre-push hook does the slightly heavier typecheck but with Turborepo caching remains fast. Unit tests and E2E are CI-only.
 
@@ -151,7 +151,7 @@ Allowed types per `docs/06-repository-conventions.md`: `feat`, `fix`, `build`, `
   workflows/
     ci.yml           # Single workflow — all jobs defined here
 .husky/
-  pre-push           # New hook: turbo typecheck --filter=...[HEAD]
+  pre-push           # New hook: turbo typecheck --filter=...[origin/main]
 ```
 
 No existing files are modified. The `commitlint.config.js` and existing Husky hooks remain unchanged.
