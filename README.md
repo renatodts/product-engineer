@@ -2,7 +2,7 @@
 
 > A product-engineering gym: own the full loop — talk to the user, decide what to build, build, observe, iterate.
 
-Nine real-world projects of rising complexity — built with AI assistance, shipped as public portfolio artifacts — to train the engineering judgment that matters in 2025 and beyond.
+Nine real-world projects of rising complexity — built with AI assistance, shipped as public portfolio artifacts — to train the engineering judgment that matters in 2026 and beyond.
 
 ## Vision
 
@@ -61,12 +61,13 @@ product-engineer/
 │   ├── 2-invoice-automation-api/
 │   └── ...                        # same pattern through project 9
 │
-├── packages/                      # 11 shared packages (all @product-engineer/*)
+├── packages/                      # 12 shared packages (all @product-engineer/*)
 │   ├── typescript-config/         # Base tsconfig presets
 │   ├── eslint-config/             # Shared ESLint rules
 │   ├── ui/                        # Shared React component library
 │   ├── design-system/             # Design tokens and theme
 │   ├── shared-types/              # Cross-cutting TypeScript types
+│   ├── shared-contracts/          # API contracts (Zod) shared across web/mobile/api
 │   ├── shared-utils/              # Pure utility functions
 │   ├── shared-domain/             # Domain primitives (Value Objects, etc.)
 │   ├── shared-ai/                 # AI client wrappers and utilities

@@ -49,6 +49,21 @@ significant decision is made, a blocker is discovered, or a pattern is establish
 - **Trade-off:** Each project's first implementation session must explicitly add shared packages.
   There is no "batteries included" starting point.
 
+### AD-005: Shared contracts package, not shared domain models
+
+> Formalized as `docs/adrs/020` (Requirement ID PKG-001).
+
+- **What:** API contracts (the serializable shapes crossing the wire) live in a dedicated
+  `@product-engineer/shared-contracts` package as Zod schemas (single source of truth), consumed by
+  a project's `-web`, `-mobile`, and `-api` apps. Rich domain models stay local to each `-api` (in
+  `src/domain/`). `shared-types` remains for cross-cutting primitives only.
+- **Why:** Up to three consumers (web/mobile/api) must agree on the wire shape; sharing the domain
+  model instead would leak server concerns into clients and force the domain across the ESM/CJS
+  boundary (ADR-002). A framework-neutral Zod contract gives runtime validation on the api and
+  inferred types on the clients from one definition.
+- **Trade-off:** Slightly more than a score-10 app strictly needs, and contributors must place each
+  type in the right home (contract vs domain vs primitive).
+
 ---
 
 ## Active Blockers

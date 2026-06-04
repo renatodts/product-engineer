@@ -95,6 +95,8 @@ jobs:
   e2e:
     name: E2E Tests
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.60.0-noble
     timeout-minutes: 30
     needs: [ci-gate]
     if: >
@@ -110,5 +112,4 @@ jobs:
           node-version: '22'
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm exec playwright install --with-deps chromium
-      - run: pnpm turbo test:e2e
+      - run: pnpm test:e2e

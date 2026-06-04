@@ -29,5 +29,8 @@ npm-debug.log*
 pnpm-debug.log*
 
 # Local agent / skill tooling
-.agents/
-.claude/
+# .claude/ is tracked so the shared harness (commands, vendored skills) travels with the repo.
+# Keep only personal/secret Claude files local.
+.claude/settings.local.json
+.claude/*.local.json
+.agents/.skill-lock.json.backup

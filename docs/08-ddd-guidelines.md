@@ -19,6 +19,19 @@ Applying full DDD to a score-10 project is over-engineering. Not applying it to 
 
 ---
 
+## Contracts vs Domain Models (applies at every score)
+
+Even a score-10 app with no DDD must not blur two different kinds of type:
+
+- **Domain model** — entities with behaviour and invariants, value objects, domain services. This is server-side logic and **stays local to the `-api` app** (in `src/domain/`). It is never exported to clients.
+- **Contract** — the plain, serializable request/response shapes (DTOs) that cross the wire. These live in `@product-engineer/shared-contracts`, defined as **Zod schemas as the single source of truth**: the api validates inbound payloads against the schema, while `-web` and `-mobile` infer their TypeScript types from it.
+
+`@product-engineer/shared-types` is reserved for cross-cutting primitives (`Id`, `Timestamped`) — not per-project contracts. Keep `shared-contracts` framework-neutral (no UI, no server-framework imports) so it stays CommonJS-importable by NestJS apps (ADR-002), and wire it in per project (ADR-004).
+
+**Rule of thumb: share the contract, not the domain model.** Sharing a rich domain model leaks server concerns into clients and couples them to internal changes; sharing nothing lets client and server types drift apart. See [adrs/020-shared-contracts-not-domain-models.md](adrs/020-shared-contracts-not-domain-models.md).
+
+---
+
 ## Value Objects
 
 A value object is an immutable object defined entirely by its attributes. It has no identity — two value objects with the same attributes are equal.
