@@ -7,12 +7,17 @@ on:
     branches: [main]
   workflow_dispatch:
 
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 
 env:
   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
   TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+  TURBO_UI: 'false'
 
 jobs:
   lint-format:
@@ -33,7 +38,7 @@ jobs:
       - run: pnpm turbo lint --filter=...[HEAD^1]
       - name: Validate commit messages
         if: github.event_name == 'pull_request'
-        run: pnpm exec commitlint --from ${{ github.event.pull_request.base.sha }} --to HEAD
+        run: pnpm exec commitlint --from "${{ github.event.pull_request.base.sha }}" --to HEAD
 
   type-check:
     name: Type Check
