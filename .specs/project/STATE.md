@@ -64,6 +64,21 @@ significant decision is made, a blocker is discovered, or a pattern is establish
 - **Trade-off:** Slightly more than a score-10 app strictly needs, and contributors must place each
   type in the right home (contract vs domain vs primitive).
 
+### AD-006: AI Flashcards (Project 1) scope locked
+
+> Spec: `.specs/features/ai-flashcards/spec.md` · decisions: `.specs/features/ai-flashcards/context.md`.
+> Requirement IDs APP1-001…APP1-015 (APP1- namespace opened here).
+
+- **What:** Project 1 spans all three apps (api+web+mobile). Persistence is **Postgres + Prisma**;
+  AI generation uses the **real Anthropic SDK** behind an `AiCardGenerator` port (offline fake for
+  tests); scheduling is **SM-2**. Single-user, **no auth** (no `shared-auth`).
+- **Why:** Foundation full-stack vertical exercising AI + a real datastore + shared Zod contracts.
+- **Trade-off:** More than a toy score-10 app strictly needs (real DB + real LLM), chosen for
+  production-representative practice.
+- **Status:** Phase-1 spec + Phase-2 `design.md` and `tasks.md` complete (T1–T16). Resolved opens:
+  model `claude-sonnet-4-6`, `maxCards` 1–20 (default 10), mobile `EXPO_PUBLIC_API_URL`, api
+  integration tests run against a Postgres service container in CI (new id CI-001). Next: `/implement`.
+
 ---
 
 ## Active Blockers
