@@ -97,6 +97,10 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.60.0-noble
+    env:
+      # The image preinstalls browsers at /ms-playwright; the job HOME is /github/home,
+      # so point Playwright at the image path instead of the empty ~/.cache/ms-playwright.
+      PLAYWRIGHT_BROWSERS_PATH: /ms-playwright
     timeout-minutes: 30
     needs: [ci-gate]
     if: >
