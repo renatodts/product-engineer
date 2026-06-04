@@ -42,7 +42,8 @@ Run a single test: `pnpm --filter <workspace> exec vitest run path/to/file.test.
 - **`packages/`** — shared libs, all scoped `@product-engineer/*`, flat (no nested grouping).
   `typescript-config` and `eslint-config` hold the base presets; `ui`, `design-system`,
   `shared-domain`, `shared-utils`, `shared-ai`, `shared-auth`, `shared-observability`,
-  `shared-types`, `shared-testing` are runtime libs for the later, more complex projects.
+  `shared-types`, `shared-contracts`, `shared-testing` are runtime libs for the later, more
+  complex projects.
 - **`docs/`** — numbered guideline docs (`01`–`20`), `docs/adrs/` (Architecture Decision
   Records — the canonical record of cross-cutting decisions), and `docs/ai/` (AI playbooks).
 - **`.specs/`** — TLC Spec-Driven session memory: `codebase/` (architecture, conventions,
@@ -64,6 +65,13 @@ These are settled ADRs (`docs/adrs/`); follow them rather than "fixing" the appa
 - **Apps pre-wire config only (ADR-004).** Every app depends only on `typescript-config` and
   `eslint-config` at scaffold time. Shared _runtime_ libraries are **not** pre-installed — add a
   shared package to an app deliberately, as a reviewable decision, when the project actually needs it.
+- **Share contracts, not domain models (ADR-020).** Rich domain models (entities with invariants,
+  value objects) stay **local to each `*-api`** app (in `src/domain/`), never exported to clients.
+  The serializable request/response shapes that cross the wire live in
+  `@product-engineer/shared-contracts`, defined as **Zod schemas (single source of truth)** and
+  consumed by a project's `-web`/`-mobile`/`-api`: the api validates against them, clients infer
+  types from them. `shared-types` is for cross-cutting primitives only, not per-project contracts.
+  Keep `shared-contracts` framework-neutral so it stays CJS-importable (ADR-002).
 - **TypeScript is strict** with `noUncheckedIndexedAccess` and `verbatimModuleSyntax` on. Apps
   extend a preset from `@product-engineer/typescript-config` (`base`/`nextjs`/`nestjs`/`expo`).
 

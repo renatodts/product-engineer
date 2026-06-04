@@ -29,17 +29,18 @@ These packages are tool configurations, not runtime code. Every workspace instal
 These packages contain shared runtime code. Apps wire them in as `dependencies` when the project
 requires them — they are not pre-installed in the scaffold.
 
-| Package                                  | Purpose                                              |
-| ---------------------------------------- | ---------------------------------------------------- |
-| `@product-engineer/ui`                   | Shared React components (Button, Card, Text)         |
-| `@product-engineer/design-system`        | Design tokens (colors, spacing, typography)          |
-| `@product-engineer/shared-types`         | Cross-cutting TypeScript types and interfaces        |
-| `@product-engineer/shared-utils`         | Pure utility functions                               |
-| `@product-engineer/shared-domain`        | Domain primitives (ValueObject, Entity base classes) |
-| `@product-engineer/shared-ai`            | Prompt builder and AI call helpers                   |
-| `@product-engineer/shared-auth`          | Auth types and JWT helpers                           |
-| `@product-engineer/shared-observability` | Structured logger                                    |
-| `@product-engineer/shared-testing`       | Test factories and fixtures                          |
+| Package                                  | Purpose                                                    |
+| ---------------------------------------- | ---------------------------------------------------------- |
+| `@product-engineer/ui`                   | Shared React components (Button, Card, Text)               |
+| `@product-engineer/design-system`        | Design tokens (colors, spacing, typography)                |
+| `@product-engineer/shared-types`         | Cross-cutting TypeScript types and primitives              |
+| `@product-engineer/shared-contracts`     | API contracts (Zod schemas) shared across a project's apps |
+| `@product-engineer/shared-utils`         | Pure utility functions                                     |
+| `@product-engineer/shared-domain`        | Domain primitives (ValueObject, Entity base classes)       |
+| `@product-engineer/shared-ai`            | Prompt builder and AI call helpers                         |
+| `@product-engineer/shared-auth`          | Auth types and JWT helpers                                 |
+| `@product-engineer/shared-observability` | Structured logger                                          |
+| `@product-engineer/shared-testing`       | Test factories and fixtures                                |
 
 ## Dependency Graph (scaffold state)
 
@@ -74,6 +75,7 @@ graph TD
     UI["ui"]
     DS["design-system"]
     ST["shared-types"]
+    SC["shared-contracts"]
     SU["shared-utils"]
     SD["shared-domain"]
     SA["shared-ai"]

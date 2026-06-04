@@ -957,6 +957,24 @@ importers:
         specifier: ^2.1.8
         version: 2.1.9(@types/node@25.9.1)(jsdom@25.0.1)(lightningcss@1.27.0)(terser@5.48.0)
 
+  packages/shared-contracts:
+    devDependencies:
+      '@product-engineer/eslint-config':
+        specifier: workspace:*
+        version: link:../eslint-config
+      '@product-engineer/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      eslint:
+        specifier: ^9.17.0
+        version: 9.39.4(jiti@2.6.1)
+      typescript:
+        specifier: ^5.6.3
+        version: 5.9.3
+      vitest:
+        specifier: ^2.1.8
+        version: 2.1.9(@types/node@25.9.1)(jsdom@25.0.1)(lightningcss@1.27.0)(terser@5.48.0)
+
   packages/shared-domain:
     devDependencies:
       '@product-engineer/eslint-config':
