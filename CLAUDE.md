@@ -9,6 +9,46 @@ shippable app. Projects 1–9 are scaffolded under `apps/` but most contain only
 foundation (tooling, shared packages, app skeletons) is in place; feature work is just beginning.
 The README's project table maps each number prefix to its project and focus.
 
+## SDLC harness (start here)
+
+This is the operating contract. For any non-trivial change, drive it with the **tlc-spec-driven**
+skill: a spec or plan is produced **before any code**. The slash commands (`/analyze`, `/implement`,
+`/validate`, `/ship`) chain the right skill and the real commands at each phase. Run process and
+planning skills first, then implementation skills.
+
+### Unified flow
+
+| Phase                          | Goal                               | Skill (invoke first)                                                             | Commands                                                                                                                                                               | Artifact                                                                                                                      | Gate to advance                                                                                                                               |
+| ------------------------------ | ---------------------------------- | -------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| 0. Orient (only if unfamiliar) | Map the relevant slice of the tree | `codenavi`                                                                       | (read only)                                                                                                                                                            | scratch notes                                                                                                                 | none                                                                                                                                          |
+| 1. Analysis and Spec           | Decide WHAT, with traceable IDs    | `tlc-spec-driven` (Specify; `the-fool` to red-team risky scope)                  | `/analyze <desc>`                                                                                                                                                      | `.specs/features/<slug>/spec.md` (+ `design.md`/`tasks.md` for Large/Complex) or `.specs/quick/NNN-slug/TASK.md` (Quick mode) | spec or plan exists before any code                                                                                                           |
+| 2. Implementation              | Build it in atomic steps           | `tlc-spec-driven` (Execute) + per-stack skill (see decision tree)                | `/implement [slug]`                                                                                                                                                    | code + atomic Conventional Commits                                                                                            | each task "Done when" met                                                                                                                     |
+| 3. Local validation            | Prove it locally                   | `gh-fix-ci` / `superpowers:systematic-debugging` on failure                      | `/validate` -> `pnpm format` then `pnpm turbo lint typecheck test build --filter=...[origin/main]`; E2E (opt-in) `pnpm turbo test:e2e` after `pnpm playwright install` | green local sweep                                                                                                             | lint + typecheck + test + build pass; format clean                                                                                            |
+| 4. Self-review and PR          | Catch your own bugs, open PR       | `the-fool` (red-team), `security-best-practices` (if auth/data or `shared-auth`) | `/ship` -> `commit-commands:commit-push-pr` (or `gh pr create`)                                                                                                        | PR with Conventional title                                                                                                    | branch is `feat\|fix\|chore/<scope>/<slug>`; commits pass commitlint                                                                          |
+| 5. CI and merge                | Pass the merge gate                | `gh-fix-ci` (red CI), `gh-address-comments` (review)                             | CI runs `lint-format` + `type-check` + `unit-tests` -> `ci-gate`                                                                                                       | green `ci-gate`                                                                                                               | `ci-gate` success (it is the merge gate)                                                                                                      |
+| 6. Deploy and post-deploy      | Ship to an environment             | none yet                                                                         | none yet                                                                                                                                                               | none                                                                                                                          | **GAP: no CD pipeline or environments exist.** E2E runs post-merge on `main` only. Add a target and a `/deploy` command here when one exists. |
+
+The `--filter=...[origin/main]` scope keeps each phase to changed packages. Run `pnpm format`
+(write) before `format:check` (pre-commit hook) so the hook passes; never bypass hooks with
+`--no-verify`.
+
+### Decision tree (which skill, which entry phase)
+
+**Default: any non-trivial change starts at Phase 1 with `tlc-spec-driven`.** It auto-sizes depth
+(Quick / Medium / Large / Complex), so "start at TLC SDD" does not mean heavyweight.
+
+| Task type                                  | Entry                                | Skill chain after TLC SDD sizing                                                                                                         |
+| ------------------------------------------ | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| Bug fix (<=3 files)                        | TLC SDD Quick mode                   | `superpowers:systematic-debugging` -> fix -> `/validate` -> `/ship`                                                                      |
+| New admin page or net-new UI (`*-web`)     | TLC SDD Specify                      | `frontend-design` (discovery) -> `react-best-practices` -> `/implement`                                                                  |
+| Dashboard / existing-page change (`*-web`) | TLC SDD (Medium)                     | `react-best-practices` + `react-composition-patterns` -> `/validate`                                                                     |
+| Form scaffold (`*-web`/`*-mobile`)         | TLC SDD Specify                      | `frontend-design` + `react-composition-patterns`; wire request/response as Zod in `shared-contracts` (ADR-020)                           |
+| E2E test only                              | Phase 2/3 (no new spec)              | `playwright-skill` -> `pnpm turbo test:e2e` (ADR-003)                                                                                    |
+| Refactor (cross-module)                    | TLC SDD Specify (no behavior change) | `coupling-analysis` / `modular-decomposition` -> heavy `/validate`                                                                       |
+| Schema or contract change (`*-api`)        | TLC SDD Specify                      | `domain-analysis` / `tactical-ddd` + `nestjs-modular-monolith`; update `shared-contracts` Zod; keep it CJS-importable (ADR-002, ADR-020) |
+| New ADR or RFC                             | n/a                                  | `create-adr` / `create-rfc` -> `docs/adrs/`                                                                                              |
+| Mobile (`*-mobile`)                        | TLC SDD Specify                      | `react-native-expert`                                                                                                                    |
+
 ## Commands
 
 All tasks run through Turborepo from the repo root (`pnpm@10.11.0`, Node `>=22`):
