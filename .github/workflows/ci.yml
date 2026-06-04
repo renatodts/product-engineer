@@ -110,5 +110,5 @@ jobs:
           node-version: '22'
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm --filter "./apps/*-web" exec playwright install --with-deps chromium
       - run: pnpm turbo test:e2e
