@@ -1,0 +1,9 @@
+{
+  "expo": {
+    "name": "AI Flashcards",
+    "slug": "ai-flashcards",
+    "version": "0.0.0",
+    "orientation": "portrait",
+    "platforms": ["ios", "android"]
+  }
+}

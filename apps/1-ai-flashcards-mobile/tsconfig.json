@@ -1,0 +1,5 @@
+{
+  "extends": "@product-engineer/typescript-config/expo.json",
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
+}
