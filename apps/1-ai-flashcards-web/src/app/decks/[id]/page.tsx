@@ -7,6 +7,7 @@ import type { Card } from '@product-engineer/shared-contracts';
 import { api } from '../../../lib/api';
 import { CardForm } from '../../../components/CardForm';
 import { CardList } from '../../../components/CardList';
+import { GeneratePanel } from '../../../components/GeneratePanel';
 
 export default function DeckDetailPage() {
   const params = useParams<{ id: string }>();
@@ -76,6 +77,16 @@ export default function DeckDetailPage() {
       {error ? <p className="error">{error}</p> : null}
 
       <CardList cards={cards} onEdit={setEditing} onDelete={handleDelete} />
+
+      <hr style={{ border: 'none', borderTop: '1px solid var(--border)', margin: '2rem 0' }} />
+
+      <GeneratePanel
+        onGenerate={(notes) => api.generate(deckId, notes)}
+        onAccept={async (selected) => {
+          const created = await api.acceptSuggestions(deckId, selected);
+          setCards((prev) => [...prev, ...created]);
+        }}
+      />
     </main>
   );
 }
