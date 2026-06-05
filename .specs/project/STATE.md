@@ -75,10 +75,16 @@ significant decision is made, a blocker is discovered, or a pattern is establish
 - **Why:** Foundation full-stack vertical exercising AI + a real datastore + shared Zod contracts.
 - **Trade-off:** More than a toy score-10 app strictly needs (real DB + real LLM), chosen for
   production-representative practice.
-- **Status:** Implementation in progress on branch `feat/ai-flashcards/foundation`. Phase-1
-  Foundation complete: **T1** contracts (`ad9ef71`), **T2** shared-ai port+fake (`5e3dd77`),
-  **T4** SM-2 (`2421df9`), **T3** Prisma/Postgres (this commit). Next: Phase-2 API — **T5** DecksModule.
-  Deliberate deps added (ADR-004): `zod` → shared-contracts; `prisma`+`@prisma/client` → api.
+- **Status:** Backend complete on branch `feat/ai-flashcards/foundation` (PR open).
+  Phase-1 Foundation: T1 `ad9ef71`, T2 `5e3dd77`, T4 `2421df9`, T3 `dffd9f7`. Phase-2 API:
+  T5 `5ae6b1f`, T6 `9a8ab59`, T7 `a6586b5`, T8b `e8dc50e`, T8 `f725fce`. CI: T16 `cb924df`
+  (Postgres service for api integration tests). **81 tests green** (23 contracts + 13 shared-ai +
+  45 api), `--frozen-lockfile` clean. Deliberate deps (ADR-004): `zod`→shared-contracts;
+  `prisma`+`@prisma/client`+`zod`+`dotenv`+`shared-contracts`+`shared-ai` →api;
+  `@anthropic-ai/sdk`→shared-ai. **Remaining: Phase-3 web (T9–T13), Phase-4 mobile (T14–T15).**
+  Local Postgres on host port 5433 (`docker compose up -d`); tests use a `flashcards_test` DB via
+  gitignored `.env.test`. Deviations: per-route Zod pipe (not global); accept route `/cards/accept`
+  (not `cards:accept`) — both marked SPEC_DEVIATION in code.
 
 ---
 

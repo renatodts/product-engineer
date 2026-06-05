@@ -313,7 +313,7 @@ T7,T8 ──→ T16 (Postgres CI)
 
 ---
 
-### T16: Postgres in CI
+### T16: Postgres in CI — ✅ Done (commit `cb924df`)
 
 **What:** Add a Postgres service container to the api `unit-tests` job so integration tests run in CI.
 **Where:** `.github/workflows/ci.yml`
