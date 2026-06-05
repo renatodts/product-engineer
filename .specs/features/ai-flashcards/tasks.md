@@ -121,7 +121,7 @@ T7,T8 ──→ T16 (Postgres CI)
 
 ---
 
-### T5: DecksModule (CRUD)
+### T5: DecksModule (CRUD) — ✅ Done (commit `5ae6b1f`)
 
 **What:** `GET/POST /decks`, `DELETE /decks/:id` with `cardCount`/`dueCount`; Zod validation pipe.
 **Where:** `apps/1-ai-flashcards-api/src/decks/` (+ global Zod pipe in `main.ts`)
@@ -137,7 +137,7 @@ T7,T8 ──→ T16 (Postgres CI)
 
 ---
 
-### T6: CardsModule (CRUD)
+### T6: CardsModule (CRUD) — ✅ Done (commit `9a8ab59`)
 
 **What:** `GET/POST /decks/:id/cards`, `PATCH/DELETE /cards/:id`; new cards get default SM-2 state.
 **Where:** `apps/1-ai-flashcards-api/src/cards/`
@@ -154,7 +154,7 @@ T7,T8 ──→ T16 (Postgres CI)
 
 ---
 
-### T7: ReviewModule (due session + grade)
+### T7: ReviewModule (due session + grade) — ✅ Done (commit `a6586b5`)
 
 **What:** `GET /decks/:id/review` (due cards) + `POST /cards/:id/review` (apply SM-2, log review).
 **Where:** `apps/1-ai-flashcards-api/src/review/`
@@ -171,7 +171,7 @@ T7,T8 ──→ T16 (Postgres CI)
 
 ---
 
-### T8b: Anthropic adapter [P after T2]
+### T8b: Anthropic adapter [P after T2] — ✅ Done (commit `e8dc50e`)
 
 **What:** `AnthropicAiCardGenerator` wrapping `@anthropic-ai/sdk`; CJS-import smoke from api.
 **Where:** `packages/shared-ai/src/` (+ dep `@anthropic-ai/sdk`)
@@ -188,7 +188,7 @@ T7,T8 ──→ T16 (Postgres CI)
 
 ---
 
-### T8: GenerationModule (generate + accept)
+### T8: GenerationModule (generate + accept) — ✅ Done (commit `f725fce`; accept route is `/cards/accept`, see SPEC_DEVIATION)
 
 **What:** `POST /decks/:id/generate` (suggestions, not persisted) + `POST /decks/:id/cards:accept` (persist selected).
 **Where:** `apps/1-ai-flashcards-api/src/generation/` (+ DI binding key→adapter, else fake)
