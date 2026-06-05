@@ -22,7 +22,8 @@
     "rxjs": "^7.8.1",
     "@product-engineer/shared-contracts": "workspace:*",
     "dotenv": "^16.4.7",
-    "zod": "^4.4.3"
+    "zod": "^4.4.3",
+    "@product-engineer/shared-ai": "workspace:*"
   },
   "devDependencies": {
     "prisma": "^6.19.3",
