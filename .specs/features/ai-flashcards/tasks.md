@@ -206,7 +206,7 @@ T7,T8 ──→ T16 (Postgres CI)
 
 ---
 
-### T9: web API client
+### T9: web API client — ✅ Done (commit `8cf2368`)
 
 **What:** Typed `fetch` wrapper; request/response types inferred from contracts.
 **Where:** `apps/1-ai-flashcards-web/src/lib/api.ts` (+ dep `@product-engineer/shared-contracts`)
@@ -222,7 +222,7 @@ T7,T8 ──→ T16 (Postgres CI)
 
 ---
 
-### T10: web deck list [P]
+### T10: web deck list [P] — ✅ Done (commit `c6f7295`)
 
 **What:** Decks page: list (name/cardCount/dueCount), create, delete.
 **Where:** `apps/1-ai-flashcards-web/src/app/page.tsx` + `components/DeckList`,`DeckForm` (+ `e2e/decks.spec.ts`)
@@ -237,7 +237,7 @@ T7,T8 ──→ T16 (Postgres CI)
 
 ---
 
-### T11: web card management [P]
+### T11: web card management [P] — ✅ Done (commit `cfaa4f7`)
 
 **What:** Deck detail card list + add/edit/delete.
 **Where:** `apps/1-ai-flashcards-web/src/app/decks/[id]/page.tsx` + `components/CardList`,`CardForm` (+ e2e)
@@ -252,7 +252,7 @@ T7,T8 ──→ T16 (Postgres CI)
 
 ---
 
-### T12: web generation panel [P]
+### T12: web generation panel [P] — ✅ Done (commit `7793281`)
 
 **What:** Paste notes → preview suggestions → accept subset; non-blocking failure + retry.
 **Where:** `apps/1-ai-flashcards-web/src/app/decks/[id]/` + `components/GeneratePanel` (+ e2e)
@@ -268,7 +268,7 @@ T7,T8 ──→ T16 (Postgres CI)
 
 ---
 
-### T13: web review session [P]
+### T13: web review session [P] — ✅ Done (commit `55a723a`)
 
 **What:** Review UI: one due card at a time, reveal back, grade 0–5, end summary.
 **Where:** `apps/1-ai-flashcards-web/src/app/decks/[id]/review/page.tsx` + `components/ReviewSession` (+ e2e)
