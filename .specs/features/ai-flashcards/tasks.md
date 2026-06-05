@@ -54,7 +54,7 @@ T7,T8 ──→ T16 (Postgres CI)
 
 ## Task Breakdown
 
-### T1: shared-contracts Zod schemas [P]
+### T1: shared-contracts Zod schemas [P] — ✅ Done (commit `ad9ef71`)
 
 **What:** Define all wire-shape Zod schemas + inferred types.
 **Where:** `packages/shared-contracts/src/` (replace stub `index.ts`; add `package.json` dep `zod`)
@@ -71,7 +71,7 @@ T7,T8 ──→ T16 (Postgres CI)
 
 ---
 
-### T2: shared-ai generation port + fake [P]
+### T2: shared-ai generation port + fake [P] — ✅ Done (commit `5e3dd77`)
 
 **What:** `AiCardGenerator` port + `FakeAiCardGenerator` (deterministic).
 **Where:** `packages/shared-ai/src/` · **Depends on:** None · **Reuses:** `buildPrompt` · **Requirement:** APP1-008
@@ -87,7 +87,7 @@ T7,T8 ──→ T16 (Postgres CI)
 
 ---
 
-### T3: Prisma + Postgres setup
+### T3: Prisma + Postgres setup — ✅ Done (commit pending; migration authored offline via `migrate diff`, Docker daemon unavailable to apply live)
 
 **What:** Prisma schema (Deck/Card/Review), initial migration, `PrismaService`/`PrismaModule`, Docker Compose, `DATABASE_URL`.
 **Where:** `apps/1-ai-flashcards-api/{prisma/,src/prisma/,docker-compose.yml,.env.example}` (+ deps `prisma`,`@prisma/client`)
@@ -105,7 +105,7 @@ T7,T8 ──→ T16 (Postgres CI)
 
 ---
 
-### T4: SM-2 scheduler (pure) [P]
+### T4: SM-2 scheduler (pure) [P] — ✅ Done (commit `2421df9`)
 
 **What:** `applySm2(state, grade, now)` per spec §7.
 **Where:** `apps/1-ai-flashcards-api/src/domain/sm2.ts` (+ `sm2.spec.ts`)

@@ -1,0 +1,42 @@
+// Prisma schema for AI Flashcards (Project 1).
+// Rich domain models stay api-local (ADR-020); these are the persistence models.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Deck {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+  cards     Card[]
+}
+
+model Card {
+  id          String   @id @default(cuid())
+  deckId      String
+  deck        Deck     @relation(fields: [deckId], references: [id], onDelete: Cascade)
+  front       String
+  back        String
+  easeFactor  Float    @default(2.5)
+  interval    Int      @default(0)
+  repetitions Int      @default(0)
+  dueAt       DateTime @default(now())
+  createdAt   DateTime @default(now())
+  reviews     Review[]
+}
+
+model Review {
+  id         String   @id @default(cuid())
+  cardId     String
+  card       Card     @relation(fields: [cardId], references: [id], onDelete: Cascade)
+  grade      Int
+  interval   Int
+  easeFactor Float
+  reviewedAt DateTime @default(now())
+}

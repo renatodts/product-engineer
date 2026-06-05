@@ -75,21 +75,35 @@ significant decision is made, a blocker is discovered, or a pattern is establish
 - **Why:** Foundation full-stack vertical exercising AI + a real datastore + shared Zod contracts.
 - **Trade-off:** More than a toy score-10 app strictly needs (real DB + real LLM), chosen for
   production-representative practice.
-- **Status:** Phase-1 spec + Phase-2 `design.md` and `tasks.md` complete (T1–T16). Resolved opens:
-  model `claude-sonnet-4-6`, `maxCards` 1–20 (default 10), mobile `EXPO_PUBLIC_API_URL`, api
-  integration tests run against a Postgres service container in CI (new id CI-001). Next: `/implement`.
+- **Status:** Implementation in progress on branch `feat/ai-flashcards/foundation`. Phase-1
+  Foundation complete: **T1** contracts (`ad9ef71`), **T2** shared-ai port+fake (`5e3dd77`),
+  **T4** SM-2 (`2421df9`), **T3** Prisma/Postgres (this commit). Next: Phase-2 API — **T5** DecksModule.
+  Deliberate deps added (ADR-004): `zod` → shared-contracts; `prisma`+`@prisma/client` → api.
 
 ---
 
 ## Active Blockers
 
-None.
+### BL-001: NestJS `nest build` emits to the wrong directory (pre-existing, repo-wide)
+
+- **What:** `packages/typescript-config/nestjs.json` sets `"outDir": "./dist"`. TypeScript resolves
+  a relative `outDir` from an extended config **relative to the preset file's own directory**, so
+  every `*-api` app's `nest build` emits into `packages/typescript-config/dist/` instead of
+  `apps/<app>/dist/`. The build still exits 0 (so `ci-gate` stays green); the only signal is Turbo's
+  "no output files found for task …#build" warning.
+- **Impact:** No api produces a runnable `dist/`. Does not affect dev (`nest start`), tests
+  (ts-jest), typecheck, or the current gate — but blocks any `node dist/main` / container run.
+- **Fix (separate task):** a `build(typescript-config)` change — move `outDir`/`rootDir` out of the
+  shared preset into each app's `tsconfig.build.json`, verified across all nine api apps. Out of
+  scope for APP1 foundation; surfaced during T3.
 
 ---
 
 ## Lessons Learned
 
-None yet.
+- **TS `extends` resolves `outDir`/`rootDir` relative to the file that DECLARES them**, not the leaf
+  consuming config. Shared tsconfig presets should leave output paths to the leaf config. Surfaced
+  via BL-001 while wiring Prisma into the api build (T3).
 
 ---
 
