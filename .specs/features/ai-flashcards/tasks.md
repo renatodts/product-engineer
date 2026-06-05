@@ -87,7 +87,7 @@ T7,T8 ──→ T16 (Postgres CI)
 
 ---
 
-### T3: Prisma + Postgres setup — ✅ Done (commit pending; migration authored offline via `migrate diff`, Docker daemon unavailable to apply live)
+### T3: Prisma + Postgres setup — ✅ Done (commit `dffd9f7`; migration authored offline via `migrate diff`, Docker daemon unavailable to apply live)
 
 **What:** Prisma schema (Deck/Card/Review), initial migration, `PrismaService`/`PrismaModule`, Docker Compose, `DATABASE_URL`.
 **Where:** `apps/1-ai-flashcards-api/{prisma/,src/prisma/,docker-compose.yml,.env.example}` (+ deps `prisma`,`@prisma/client`)
