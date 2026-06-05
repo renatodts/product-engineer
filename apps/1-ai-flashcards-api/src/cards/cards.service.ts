@@ -1,22 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import type { Card as DbCard } from '@prisma/client';
 import type { Card, CardCreate } from '@product-engineer/shared-contracts';
+import { toCard } from '../common/card.serializer';
 import { PrismaService } from '../prisma/prisma.service';
-
-function toCard(card: DbCard): Card {
-  return {
-    id: card.id,
-    deckId: card.deckId,
-    front: card.front,
-    back: card.back,
-    easeFactor: card.easeFactor,
-    interval: card.interval,
-    repetitions: card.repetitions,
-    dueAt: card.dueAt.toISOString(),
-    createdAt: card.createdAt.toISOString(),
-  };
-}
 
 @Injectable()
 export class CardsService {
