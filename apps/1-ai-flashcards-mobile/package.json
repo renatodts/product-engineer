@@ -11,6 +11,7 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@product-engineer/shared-contracts": "workspace:*",
     "expo": "^52.0.0",
     "expo-status-bar": "^2.0.0",
     "react": "^18.3.1",
@@ -20,7 +21,9 @@
     "@product-engineer/eslint-config": "workspace:*",
     "@product-engineer/typescript-config": "workspace:*",
     "@types/react": "^18.3.12",
+    "@types/react-test-renderer": "^18.3.0",
     "eslint": "^9.17.0",
+    "react-test-renderer": "^18.3.1",
     "typescript": "^5.6.3",
     "vitest": "^2.1.8"
   }
