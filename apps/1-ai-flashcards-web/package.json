@@ -14,7 +14,8 @@
   "dependencies": {
     "next": "^15.1.2",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "@product-engineer/shared-contracts": "workspace:*"
   },
   "devDependencies": {
     "@product-engineer/eslint-config": "workspace:*",

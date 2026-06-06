@@ -85,6 +85,12 @@ significant decision is made, a blocker is discovered, or a pattern is establish
   Local Postgres on host port 5433 (`docker compose up -d`); tests use a `flashcards_test` DB via
   gitignored `.env.test`. Deviations: per-route Zod pipe (not global); accept route `/cards/accept`
   (not `cards:accept`) — both marked SPEC_DEVIATION in code.
+- **Phase-3 Web complete** on branch `feat/ai-flashcards/web` (PR #7, stacked on #6). T9 api client
+  `8cf2368`, T10 deck list `c6f7295`, T11 cards `cfaa4f7`, T12 generation `7793281`, T13 review
+  `55a723a`. **26 web unit tests + 8 Playwright E2E green**, `next build` clean. Web↔api via a Next
+  `/api` rewrite proxy (no CORS); E2E stubs the api via Playwright route interception (no backend
+  needed). Deliberate dep: `shared-contracts` (type-only). App imports are extensionless (Next can't
+  resolve `.js`-on-`.ts`). **Only remaining: Phase-4 mobile (T14–T15).**
 
 ---
 

@@ -140,6 +140,9 @@ importers:
 
   apps/1-ai-flashcards-web:
     dependencies:
+      '@product-engineer/shared-contracts':
+        specifier: workspace:*
+        version: link:../../packages/shared-contracts
       next:
         specifier: ^15.1.2
         version: 15.5.19(@playwright/test@1.60.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
