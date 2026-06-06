@@ -7,7 +7,7 @@ export default defineConfig({
   },
   test: {
     environment: 'node',
-    include: ['**/*.test.tsx'],
+    include: ['**/*.test.ts', '**/*.test.tsx'],
     alias: {
       'react-native': resolve(__dirname, 'test/stubs/react-native.ts'),
       'expo-status-bar': resolve(__dirname, 'test/stubs/expo-status-bar.ts'),

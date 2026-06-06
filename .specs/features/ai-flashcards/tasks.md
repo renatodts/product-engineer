@@ -283,7 +283,7 @@ T7,T8 ──→ T16 (Postgres CI)
 
 ---
 
-### T14: mobile decks screen (P2)
+### T14: mobile decks screen (P2) — ✅ Done (commit `751888c`)
 
 **What:** Expo screen listing decks + due counts from api.
 **Where:** `apps/1-ai-flashcards-mobile/` (screen + api client using `EXPO_PUBLIC_API_URL`)
@@ -291,14 +291,14 @@ T7,T8 ──→ T16 (Postgres CI)
 **Tools:** NONE · Skill: `react-native-expert`
 **Done when:**
 
-- [ ] Decks render with due counts; component unit test (Vitest + existing RN stubs)
-- [ ] Gate passes: `... test --filter=@product-engineer/1-ai-flashcards-mobile`
+- [x] Decks render with due counts; component unit test (Vitest + RN stubs + react-test-renderer)
+- [x] Gate passes: `... test --filter=@product-engineer/1-ai-flashcards-mobile`
 
 **Tests:** unit (Vitest) · **Gate:** full
 
 ---
 
-### T15: mobile review screen (P2)
+### T15: mobile review screen (P2) — ✅ Done (commit `ecb2f67`)
 
 **What:** Expo review flow: flip due cards, grade 0–5, post to api.
 **Where:** `apps/1-ai-flashcards-mobile/` (review screen)
@@ -306,8 +306,8 @@ T7,T8 ──→ T16 (Postgres CI)
 **Tools:** NONE · Skill: `react-native-expert`
 **Done when:**
 
-- [ ] Flip + grade posts review; component unit test
-- [ ] Gate passes: `... test --filter=...mobile`
+- [x] Flip + grade posts review; component unit test
+- [x] Gate passes: `... test --filter=...mobile`
 
 **Tests:** unit (Vitest) · **Gate:** full
 
