@@ -90,7 +90,17 @@ significant decision is made, a blocker is discovered, or a pattern is establish
   `55a723a`. **26 web unit tests + 8 Playwright E2E green**, `next build` clean. Web↔api via a Next
   `/api` rewrite proxy (no CORS); E2E stubs the api via Playwright route interception (no backend
   needed). Deliberate dep: `shared-contracts` (type-only). App imports are extensionless (Next can't
-  resolve `.js`-on-`.ts`). **Only remaining: Phase-4 mobile (T14–T15).**
+  resolve `.js`-on-`.ts`). PRs #6 and #7 merged to `main` (admin-merged; CI green, self-approval
+  blocked by GitHub).
+- **Phase-4 Mobile complete** on branch `feat/ai-flashcards/mobile` (off `main`). T14 decks screen
+  `751888c`, T15 review screen `ecb2f67`. **11 mobile unit tests green**, `tsc --noEmit` clean.
+  Mobile calls the api directly via `EXPO_PUBLIC_API_URL` (default `http://localhost:4001`) — no
+  proxy (it is not a web server). Two-screen flow (decks → review) via local state; a native router
+  is deliberately deferred (ADR-004) — two screens don't justify expo-router + its test stubs.
+  Deliberate deps: `shared-contracts` (types) + `react-test-renderer` (dev). RN test stubs extended
+  (Pressable/FlatList/SafeAreaView/ActivityIndicator/StyleSheet) so react-test-renderer can mount
+  the tree under Node/Vitest; vitest `include` now matches `*.test.ts` too. **Project 1 feature-complete
+  across all three apps.**
 
 ---
 
