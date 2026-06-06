@@ -54,7 +54,7 @@ T7,T8 ──→ T16 (Postgres CI)
 
 ## Task Breakdown
 
-### T1: shared-contracts Zod schemas [P]
+### T1: shared-contracts Zod schemas [P] — ✅ Done (commit `ad9ef71`)
 
 **What:** Define all wire-shape Zod schemas + inferred types.
 **Where:** `packages/shared-contracts/src/` (replace stub `index.ts`; add `package.json` dep `zod`)
@@ -71,7 +71,7 @@ T7,T8 ──→ T16 (Postgres CI)
 
 ---
 
-### T2: shared-ai generation port + fake [P]
+### T2: shared-ai generation port + fake [P] — ✅ Done (commit `5e3dd77`)
 
 **What:** `AiCardGenerator` port + `FakeAiCardGenerator` (deterministic).
 **Where:** `packages/shared-ai/src/` · **Depends on:** None · **Reuses:** `buildPrompt` · **Requirement:** APP1-008
@@ -87,7 +87,7 @@ T7,T8 ──→ T16 (Postgres CI)
 
 ---
 
-### T3: Prisma + Postgres setup
+### T3: Prisma + Postgres setup — ✅ Done (commit `dffd9f7`; migration authored offline via `migrate diff`, Docker daemon unavailable to apply live)
 
 **What:** Prisma schema (Deck/Card/Review), initial migration, `PrismaService`/`PrismaModule`, Docker Compose, `DATABASE_URL`.
 **Where:** `apps/1-ai-flashcards-api/{prisma/,src/prisma/,docker-compose.yml,.env.example}` (+ deps `prisma`,`@prisma/client`)
@@ -105,7 +105,7 @@ T7,T8 ──→ T16 (Postgres CI)
 
 ---
 
-### T4: SM-2 scheduler (pure) [P]
+### T4: SM-2 scheduler (pure) [P] — ✅ Done (commit `2421df9`)
 
 **What:** `applySm2(state, grade, now)` per spec §7.
 **Where:** `apps/1-ai-flashcards-api/src/domain/sm2.ts` (+ `sm2.spec.ts`)
@@ -121,7 +121,7 @@ T7,T8 ──→ T16 (Postgres CI)
 
 ---
 
-### T5: DecksModule (CRUD)
+### T5: DecksModule (CRUD) — ✅ Done (commit `5ae6b1f`)
 
 **What:** `GET/POST /decks`, `DELETE /decks/:id` with `cardCount`/`dueCount`; Zod validation pipe.
 **Where:** `apps/1-ai-flashcards-api/src/decks/` (+ global Zod pipe in `main.ts`)
@@ -137,7 +137,7 @@ T7,T8 ──→ T16 (Postgres CI)
 
 ---
 
-### T6: CardsModule (CRUD)
+### T6: CardsModule (CRUD) — ✅ Done (commit `9a8ab59`)
 
 **What:** `GET/POST /decks/:id/cards`, `PATCH/DELETE /cards/:id`; new cards get default SM-2 state.
 **Where:** `apps/1-ai-flashcards-api/src/cards/`
@@ -154,7 +154,7 @@ T7,T8 ──→ T16 (Postgres CI)
 
 ---
 
-### T7: ReviewModule (due session + grade)
+### T7: ReviewModule (due session + grade) — ✅ Done (commit `a6586b5`)
 
 **What:** `GET /decks/:id/review` (due cards) + `POST /cards/:id/review` (apply SM-2, log review).
 **Where:** `apps/1-ai-flashcards-api/src/review/`
@@ -171,7 +171,7 @@ T7,T8 ──→ T16 (Postgres CI)
 
 ---
 
-### T8b: Anthropic adapter [P after T2]
+### T8b: Anthropic adapter [P after T2] — ✅ Done (commit `e8dc50e`)
 
 **What:** `AnthropicAiCardGenerator` wrapping `@anthropic-ai/sdk`; CJS-import smoke from api.
 **Where:** `packages/shared-ai/src/` (+ dep `@anthropic-ai/sdk`)
@@ -188,7 +188,7 @@ T7,T8 ──→ T16 (Postgres CI)
 
 ---
 
-### T8: GenerationModule (generate + accept)
+### T8: GenerationModule (generate + accept) — ✅ Done (commit `f725fce`; accept route is `/cards/accept`, see SPEC_DEVIATION)
 
 **What:** `POST /decks/:id/generate` (suggestions, not persisted) + `POST /decks/:id/cards:accept` (persist selected).
 **Where:** `apps/1-ai-flashcards-api/src/generation/` (+ DI binding key→adapter, else fake)
@@ -313,7 +313,7 @@ T7,T8 ──→ T16 (Postgres CI)
 
 ---
 
-### T16: Postgres in CI
+### T16: Postgres in CI — ✅ Done (commit `cb924df`)
 
 **What:** Add a Postgres service container to the api `unit-tests` job so integration tests run in CI.
 **Where:** `.github/workflows/ci.yml`
